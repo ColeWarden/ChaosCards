@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2iuc8jdwpkr6"]
+
+[ext_resource type="Script" path="res://Board.gd" id="1_28dh3"]
+[ext_resource type="Texture2D" uid="uid://daskjvht4i4lf" path="res://spr/board.png" id="2_thr3y"]
+[ext_resource type="Script" path="res://HandHolder.gd" id="3_78s2w"]
+
+[sub_resource type="Curve" id="Curve_mma8o"]
+
+[sub_resource type="Curve" id="Curve_jci1n"]
+_data = [Vector2(0, 0), 0.0, 0.384192, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_28dh3")
+board_cell_size = Vector2i(12, 6)
+hand_card_curve = SubResource("Curve_mma8o")
+
+[node name="MiddleBoard" type="Sprite2D" parent="."]
+modulate = Color(0.466667, 0.568627, 0.835294, 1)
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 96)
+texture = ExtResource("2_thr3y")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 16)
+
+[node name="EnemyBoard" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_thr3y")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 96)
+
+[node name="PlayerBoard" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 112)
+texture = ExtResource("2_thr3y")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 96)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(96, 160)
+
+[node name="HandHolder" type="Node2D" parent="Camera2D"]
+position = Vector2(-240, 90)
+script = ExtResource("3_78s2w")
+curveRes = SubResource("Curve_jci1n")

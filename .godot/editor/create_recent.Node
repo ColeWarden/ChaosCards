@@ -1,0 +1,11 @@
+AudioStreamPlayer2D
+TileMap
+Sprite2D
+NinePatchRect
+AnimatedSprite2D
+Node2D
+Control
+TextureRect
+Label
+Line2D
+Camera2D

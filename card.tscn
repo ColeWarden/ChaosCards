@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://gbatitp3bfu6"]
+
+[ext_resource type="Script" path="res://Card.gd" id="1_3js5r"]
+[ext_resource type="Texture2D" uid="uid://cy85nnjhsnr8h" path="res://spr/card.png" id="2_222ow"]
+[ext_resource type="Texture2D" uid="uid://bkhqfqx74imif" path="res://spr/bee.png" id="3_2idxd"]
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_3js5r")
+
+[node name="NineRectShadow" type="NinePatchRect" parent="."]
+modulate = Color(0.501961, 0, 0, 1)
+texture_filter = 1
+offset_right = 32.0
+offset_bottom = 48.0
+texture = ExtResource("2_222ow")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="NineRectCard" type="NinePatchRect" parent="."]
+texture_filter = 1
+offset_right = 31.0
+offset_bottom = 34.0
+texture = ExtResource("2_222ow")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Control" type="Control" parent="NineRectCard"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 15)
+
+[node name="TextureRect" type="TextureRect" parent="NineRectCard/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_2idxd")
+stretch_mode = 3

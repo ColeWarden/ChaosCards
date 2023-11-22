@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://3x52fhsljo34"]
+
+[ext_resource type="Script" path="res://HandCard.gd" id="1_6vwdx"]
+[ext_resource type="Texture2D" uid="uid://cy85nnjhsnr8h" path="res://spr/card.png" id="2_lwdaq"]
+[ext_resource type="Texture2D" uid="uid://bkhqfqx74imif" path="res://spr/bee.png" id="3_ecp7g"]
+[ext_resource type="FontFile" uid="uid://cgb0hs7t1sgmc" path="res://yoster.ttf" id="4_hokax"]
+
+[node name="HandCard" type="Node2D"]
+script = ExtResource("1_6vwdx")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+modulate = Color(0.501961, 0, 0.203922, 1)
+texture_filter = 1
+clip_contents = true
+offset_left = -15.0
+offset_top = -23.0
+offset_right = 17.0
+offset_bottom = 25.0
+texture = ExtResource("2_lwdaq")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = 24.0
+mouse_filter = 0
+texture = ExtResource("2_lwdaq")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Control" type="Control" parent="NinePatchRect"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 15)
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/Control"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = -9.0
+offset_right = 46.0
+offset_bottom = 39.0
+texture = ExtResource("3_ecp7g")
+stretch_mode = 3
+
+[node name="TextureRect2" type="NinePatchRect" parent="NinePatchRect"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 48.0
+texture = ExtResource("2_lwdaq")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="NinePatchRect/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 11.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("4_hokax")
+theme_override_font_sizes/font_size = 12
+text = "Bee"
+horizontal_alignment = 1
+vertical_alignment = 1

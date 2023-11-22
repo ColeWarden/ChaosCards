@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2iuc8jdwpkr6"]
+
+[ext_resource type="Script" path="res://Board.gd" id="1_28dh3"]
+[ext_resource type="Script" path="res://CardManager.gd" id="2_sot46"]
+[ext_resource type="Texture2D" uid="uid://daskjvht4i4lf" path="res://spr/board.png" id="2_thr3y"]
+[ext_resource type="Texture2D" uid="uid://delm54kg50rg5" path="res://spr/gui/select_box.png" id="2_uvvmt"]
+[ext_resource type="Script" path="res://HandHolder.gd" id="3_78s2w"]
+[ext_resource type="Script" path="res://Mouse.gd" id="3_avhit"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="3_f3l1g"]
+[ext_resource type="PackedScene" uid="uid://gbatitp3bfu6" path="res://card.tscn" id="7_pc8kp"]
+[ext_resource type="Script" path="res://SoundEffectManager.gd" id="8_guo0x"]
+
+[sub_resource type="Curve" id="Curve_mma8o"]
+
+[sub_resource type="Curve" id="Curve_jci1n"]
+_data = [Vector2(0, 0), 0.0, 0.384192, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_0sniy"]
+format = 1
+stereo = true
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_28dh3")
+hand_card_curve = SubResource("Curve_mma8o")
+
+[node name="MiddleBoard" type="Sprite2D" parent="."]
+modulate = Color(0.466667, 0.568627, 0.835294, 1)
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 96)
+texture = ExtResource("2_thr3y")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 16)
+
+[node name="EnemyBoard" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_thr3y")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 96)
+
+[node name="PlayerBoard" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 112)
+texture = ExtResource("2_thr3y")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 96)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(96, 160)
+script = ExtResource("3_f3l1g")
+
+[node name="HandHolder" type="Node2D" parent="Camera2D"]
+position = Vector2(-240, 100)
+script = ExtResource("3_78s2w")
+curveRes = SubResource("Curve_jci1n")
+
+[node name="CardManager" type="Node2D" parent="."]
+script = ExtResource("2_sot46")
+
+[node name="Mouse" type="AnimatedSprite2D" parent="CardManager"]
+z_index = 1
+texture_filter = 1
+animation = &""
+script = ExtResource("3_avhit")
+
+[node name="Card" parent="CardManager/Mouse" instance=ExtResource("7_pc8kp")]
+z_index = -1
+
+[node name="Select" type="NinePatchRect" parent="CardManager/Mouse/Card"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_uvvmt")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="SoundEffectManager" type="AudioStreamPlayer2D" parent="CardManager"]
+stream = SubResource("AudioStreamWAV_0sniy")
+script = ExtResource("8_guo0x")
+
+[connection signal="card_deselected" from="Camera2D/HandHolder" to="CardManager/Mouse" method="_on_hand_holder_card_deselected"]
+[connection signal="card_selected" from="Camera2D/HandHolder" to="CardManager/Mouse" method="_on_hand_holder_card_selected"]
+[connection signal="selectable_card_hovered" from="Camera2D/HandHolder" to="CardManager/Mouse" method="_on_hand_holder_selectable_card_hovered"]
+[connection signal="place_card_from_hand" from="CardManager/Mouse" to="Camera2D/HandHolder" method="_on_mouse_place_card_from_hand"]
+[connection signal="finished" from="CardManager/SoundEffectManager" to="CardManager/SoundEffectManager" method="_on_finished"]

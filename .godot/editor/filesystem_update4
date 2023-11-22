@@ -1,0 +1,11 @@
+res://board.tscn
+res://GLOBAL.gd
+res://card.tscn
+res://hand_card.tscn
+res://level.tscn
+res://CardManager.gd
+res://Camera2D.gd
+res://Board.gd
+res://HandHolder.gd
+res://Mouse.gd
+res://Level.gd
